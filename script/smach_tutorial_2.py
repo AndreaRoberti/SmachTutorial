@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 
-import roslib
-import rospy
 import smach
-import smach_ros
 
 # define state Foo
 class Foo(smach.State):
@@ -14,7 +11,7 @@ class Foo(smach.State):
                              output_keys=['foo_counter_out'])
 
     def execute(self, userdata):
-        rospy.loginfo('Executing state FOO')
+        print('Executing state FOO')
         if userdata.foo_counter_in < 3:
             userdata.foo_counter_out = userdata.foo_counter_in + 1
             return 'outcome1'
@@ -30,8 +27,8 @@ class Bar(smach.State):
                              input_keys=['bar_counter_in'])
         
     def execute(self, userdata):
-        rospy.loginfo('Executing state BAR')
-        rospy.loginfo('Counter = %f'%userdata.bar_counter_in)        
+        print('Executing state BAR')
+        print('Counter = %f'%userdata.bar_counter_in)        
         return 'outcome1'
         
 
@@ -39,7 +36,7 @@ class Bar(smach.State):
 
 
 def main():
-    rospy.init_node('smach_example_state_machine')
+    print('smach_example_state_machine')
 
     # Create a SMACH state machine
     sm = smach.StateMachine(outcomes=['outcome4'])
